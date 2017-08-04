@@ -12,16 +12,25 @@ class Stack
   end
 
   def show
-    p @stack
+    @stack
   end
 
 end
 
-x = Stack.new
-x.show
-x.add(1)
-x.add(2)
-x.show
-x.remove
-x.add(343)
-x.show
+class Queue
+  def initialize
+    @queue = []
+  end
+
+  def enqueue(el)
+    @queue.push(el)
+  end
+
+  def dequeue
+    @queue.shift
+  end
+
+  def show
+    p @queue
+  end
+end

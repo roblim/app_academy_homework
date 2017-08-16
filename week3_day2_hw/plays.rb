@@ -84,4 +84,8 @@ class Playwright
     playwrights.each { |playwright| Playwright.new(playwright) }
   end
 
+  def initialize(options)
+    @name = options[name]
+    @birth_year = options[birth_year]
+  end
 end

@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: routes
+#
+#  id         :integer          not null, primary key
+#  number     :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Route < ApplicationRecord
   has_many :buses,
     class_name: 'Bus',
@@ -21,5 +31,9 @@ class Route < ApplicationRecord
 
   def better_drivers_query
     # TODO: your code here
+    result = {}
+    x = self.buses.includes(:drivers)
+    x.each { |bus| result[bus.id] = (bus.drivers.map { |driver| driver.name }) }
+    result
   end
 end

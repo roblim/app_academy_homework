@@ -9889,15 +9889,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(205);
 
-var _redux2 = _interopRequireDefault(_redux);
-
 var _reducer = __webpack_require__(210);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux2.default)(_reducer2.default);
+var store = (0, _redux.createStore)(_reducer2.default);
 
 exports.default = store;
 
@@ -9917,6 +9915,19 @@ module.exports = __webpack_require__(118);
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var selectCurrency = function selectCurrency(baseCurrency, rates) {
+  return {
+    type: 'SWITCH_CURRENCY',
+    baseCurrency: baseCurrency,
+    rates: rates
+  };
+};
+
+exports.default = selectCurrency;
 
 /***/ }),
 /* 86 */
@@ -23668,7 +23679,16 @@ var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  return state; // remove this and fill out the body of the reducer function
+  Object.freeze(state);
+  switch (action.type) {
+    case "SWITCH_CURRENCY":
+      return {
+        baseCurrency: action.baseCurrency,
+        rates: action.rates
+      };
+    default:
+      return state;
+  }
 };
 
 exports.default = reducer;
